@@ -13,5 +13,5 @@ const NotFoundPage = () => {
 </header>
   )
 }
-
+ 
 export default NotFoundPage
