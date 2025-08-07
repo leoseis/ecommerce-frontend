@@ -29,8 +29,8 @@ const HomePage = () => {
   return (
     <>
     <Header />
-    <CardContainer products={products}/>
-    <PlaceHolderContainer/>
+    {loading ? <PlaceHolderContainer/>:<CardContainer products={products}/> }
+    
     </>
   )
 }
