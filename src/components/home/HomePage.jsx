@@ -35,12 +35,11 @@ const HomePage = () => {
   return (
     <>
     <Header />
-    {loading ? <PlaceHolderContainer/>:<CardContainer products={products}/> }
-    {error && < Error error={error} />}
-    
+    {error && <Error error={error} />}
+    {loading && <PlaceHolderContainer />}
+    {loading || error !="" || <CardContainer products={products} />}
     </>
   )
 }
-
 
 export default HomePage
