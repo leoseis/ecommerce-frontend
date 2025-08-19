@@ -1,15 +1,25 @@
-import ProductPagePlaceHolder from "./ProductPagePlaceHolder"
-import RelatedProducts from "./RelatedProducts"
-import { BASE_URL } from "../../api"
-import api from "../../api"
-
-
-
+import ProductPagePlaceHolder from "./ProductPagePlaceHolder";
+import RelatedProducts from "./RelatedProducts";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { BASE_URL } from "../../api";
+import api from "../../api";
 
 const ProductPage = () => {
+  const { slug } = useParams();
+
+  useEffect(function () {
+    api.get(`product_detail/${slug}/`)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
   return (
-  <div>
-    <ProductPagePlaceHolder/>
+    <div>
+      <ProductPagePlaceHolder />
       <section className="py-3">
         <div className="container px-4 px-lg-5 my-5">
           <div className="row gx-4 gx-lg-5 align-items-center">
@@ -33,15 +43,14 @@ const ProductPage = () => {
                 delectus ipsam minima ea iste laborum vero?
               </p>
               <div className="d-flex">
-                
                 <button
                   className="btn btn-outline-dark flex-shrink-0"
                   type="button"
-                  onClick
-                  disabled
+                  onClick={() => console.log("Add to cart clicked")}
+                  disabled={false} // or true if you want it disabled
                 >
                   <i className="bi-cart-fill me-1"></i>
-                  "Add to cart"
+                  Add to cart
                 </button>
               </div>
             </div>
@@ -49,9 +58,9 @@ const ProductPage = () => {
         </div>
       </section>
 
-      <RelatedProducts  />
+      <RelatedProducts />
     </div>
-  )
-}
+  );
+};
 
-export default ProductPage
+export default ProductPage;
