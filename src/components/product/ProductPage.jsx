@@ -1,17 +1,23 @@
 import ProductPagePlaceHolder from "./ProductPagePlaceHolder";
 import RelatedProducts from "./RelatedProducts";
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import { BASE_URL } from "../../api";
 import api from "../../api";
 
 const ProductPage = () => {
   const { slug } = useParams();
+  const [product, setProduct] = useState({})
+  const [similarProducts, setSimilarProducts] = useState([])
+  const [loading, setLoading] = useState(false)
 
   useEffect(function () {
     api.get(`product_detail/${slug}/`)
       .then((res) => {
         console.log(res.data);
+         setProduct(res.data)
+          setSimilarProducts(res.data.similar_products)
+          setLoading(false)
       })
       .catch((err) => {
         console.log(err.message);
@@ -32,9 +38,9 @@ const ProductPage = () => {
             </div>
             <div className="col-md-6">
               <div className="small mb-1">SKU: BST-498</div>
-              <h1 className="display-5 fw-bolder"></h1>
+              <h1 className="display-5 fw-bolder">{product.name}</h1>
               <div className="fs-5 mb-5">
-                <span>{`$`}</span>
+               <span>{`$${product.price}`}</span>
               </div>
               <p className="lead">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
