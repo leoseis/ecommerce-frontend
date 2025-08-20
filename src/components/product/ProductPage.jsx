@@ -23,9 +23,12 @@ const ProductPage = () => {
         console.log(err.message);
       });
   }, []);
+
+     if (loading) {
+       <ProductPagePlaceHolder />
+     }
   return (
     <div>
-      <ProductPagePlaceHolder />
       <section className="py-3">
         <div className="container px-4 px-lg-5 my-5">
           <div className="row gx-4 gx-lg-5 align-items-center">
