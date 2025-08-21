@@ -67,7 +67,7 @@ const ProductPage = () => {
         </div>
       </section>
 
-      <RelatedProducts />
+      <RelatedProducts products={similarProducts}/>
     </div>
   );
 };
