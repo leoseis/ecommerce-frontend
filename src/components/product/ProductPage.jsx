@@ -35,7 +35,7 @@ const ProductPage = () => {
             <div className="col-md-6">
               <img
                 className="card-img-top mb-5 mb-md-0"
-                // src={`${BASE_URL}${product.image}`}
+                src={`${BASE_URL}${product.image}`}
                 alt="..."
               />
             </div>
