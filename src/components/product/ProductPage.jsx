@@ -12,7 +12,7 @@ const ProductPage = () => {
   const [loading, setLoading] = useState(false)
 
   useEffect(function () {
-    api.get(`product_detail/${slug}/`)
+    api.get(`/product_detail/${slug}/`)
       .then((res) => {
         console.log(res.data);
          setProduct(res.data)
@@ -22,7 +22,7 @@ const ProductPage = () => {
       .catch((err) => {
         console.log(err.message);
       });
-  }, []);
+  }, [slug]);
 
      if (loading) {
        <ProductPagePlaceHolder />
