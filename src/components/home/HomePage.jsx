@@ -2,6 +2,7 @@ import Header from './Header'
 import CardContainer from './CardContainer'
 import { useEffect, useState } from 'react'
 import api from '../../api'
+import { randomValue } from '../../GenerateCartCode'
 import PlaceHolderContainer from '../ui/PlaceHolderContainerr'
 import Error from '../ui/Error'
 
@@ -30,6 +31,11 @@ const HomePage = () => {
   })
   },[] );
 
+ useEffect(function(){
+    if(localStorage.getItem("cart_code") === null){
+      localStorage.setItem("cart_code", randomValue)
+    }
+  }, [])
 
 
   return (
