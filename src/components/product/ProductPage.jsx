@@ -11,6 +11,33 @@ const ProductPage = () => {
   const [similarProducts, setSimilarProducts] = useState([])
   const [loading, setLoading] = useState(false)
 
+  const cart_code = localStorage.getItem("cart_code")
+
+
+
+function add_item() {
+  if (!product?.id) {
+    console.error("Product ID not available yet");
+    toast.error("Product not loaded yet");
+    return;
+  }
+
+  const newItem = {  cart_code: cart_code, product_id: product.id };
+
+  api.post("add_item/", newItem)
+    .then(res => {
+      console.log(res.data);
+      // toast.success("Product added to cart");
+      // setNumberCartItems(curr => curr + 1);
+    })
+    .catch(err => {
+      console.error(err.response?.data || err.message);
+      // toast.error("Failed to add item");
+    });
+}
+
+
+
   useEffect(function () {
     api.get(`/product_detail/${slug}/`)
       .then((res) => {
@@ -55,8 +82,7 @@ const ProductPage = () => {
                 <button
                   className="btn btn-outline-dark flex-shrink-0"
                   type="button"
-                  onClick={() => console.log("Add to cart clicked")}
-                  disabled={false} // or true if you want it disabled
+                  onClick={add_item}
                 >
                   <i className="bi-cart-fill me-1"></i>
                   Add to cart
