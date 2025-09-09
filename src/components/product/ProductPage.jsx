@@ -10,6 +10,7 @@ const ProductPage = () => {
   const [product, setProduct] = useState({})
   const [similarProducts, setSimilarProducts] = useState([])
   const [loading, setLoading] = useState(false)
+  const[inCart, SetInCart]= useState(false)
 
   const cart_code = localStorage.getItem("cart_code")
 
@@ -27,6 +28,7 @@ function add_item() {
   api.post("add_item/", newItem)
     .then(res => {
       console.log(res.data);
+      SetInCart(true)
       // toast.success("Product added to cart");
       // setNumberCartItems(curr => curr + 1);
     })
@@ -83,9 +85,10 @@ function add_item() {
                   className="btn btn-outline-dark flex-shrink-0"
                   type="button"
                   onClick={add_item}
+                  disabled={inCart}
                 >
                   <i className="bi-cart-fill me-1"></i>
-                  Add to cart
+                  {inCart ? "product added to cart" : "Add to cart"}
                 </button>
               </div>
             </div>
