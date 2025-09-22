@@ -3,12 +3,29 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomePage from "./components/home/HomePage.JSX";
 import NotFoundPage from "./components/ui/NotFoundPage";
 import ProductPage from "./components/product/ProductPage";
-import { useState} from "react"
+import { useEffect, useState} from "react"
+import api from "./api";
+
 
 const App = () => {
   
   const [numCartItems, setNumberCartItems] = useState(0);
   const cart_code = localStorage.getItem("cart_code")
+
+    useEffect(function(){
+    if(cart_code){
+      api.get(`get_cart_stat?cart_code=${cart_code}`)
+      .then(res => {
+        console.log(res.data)
+        setNumberCartItems(res.data.num_of_items)
+      })
+
+      .catch(err => {
+        console.log(err.message)
+      })
+    }
+    
+  }, [])
 
   return (
     <BrowserRouter>
