@@ -6,7 +6,7 @@ import { BASE_URL } from "../../api";
 import api from "../../api";
 // import { toast } from "react-toastify";
 
-const ProductPage = () => {
+const ProductPage = ({setNumberCartItems}) => {
   const { slug } = useParams();
   const [product, setProduct] = useState({});
   const [similarProducts, setSimilarProducts] = useState([]);
@@ -54,6 +54,7 @@ const ProductPage = () => {
       .then((res) => {
         console.log(res.data);
         setInCart(true);
+         setNumberCartItems(curr => curr + 1)
         // toast.success("Product added to cart");
       })
       .catch((err) => {
