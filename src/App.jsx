@@ -5,6 +5,7 @@ import NotFoundPage from "./components/ui/NotFoundPage";
 import ProductPage from "./components/product/ProductPage";
 import { useEffect, useState} from "react"
 import api from "./api";
+import CartPage from "./components/cart/CartPage";
 
 
 const App = () => {
@@ -32,6 +33,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<MainLayout numCartItems={numCartItems} />}>
           <Route index element={<HomePage />} />
+          <Route path="cart" element={<CartPage  />} />
           <Route path="products/:slug" element={<ProductPage setNumberCartItems={setNumberCartItems} />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
