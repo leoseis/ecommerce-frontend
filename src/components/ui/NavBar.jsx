@@ -1,6 +1,6 @@
 import { FaCartShopping } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
-import styles from "./NavBar.module.css"
+import styles from "./Navbar.module.css"
 import NavBarLink from './NavBarLink';
 
 const NavBar = ({numCartItems}) => {

@@ -1,6 +1,6 @@
 import MainLayout from "./layout/MainLayout";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import HomePage from "./components/home/HomePage.JSX";
+import HomePage from "./components/home/HomePage.jsx";
 import NotFoundPage from "./components/ui/NotFoundPage";
 import ProductPage from "./components/product/ProductPage";
 import { useEffect, useState} from "react"

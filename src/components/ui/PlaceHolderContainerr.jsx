@@ -1,4 +1,4 @@
-import PlaceHolder from "./placeHolder";
+import PlaceHolder from "./PlaceHolder";
 
 const PlaceHolderContainer = () => {
     const placeNumbers = [...Array(12).keys()].slice(0);
