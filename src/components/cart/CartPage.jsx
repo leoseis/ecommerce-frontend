@@ -1,4 +1,4 @@
-import { useEffect, } from "react";
+import { useEffect, useState, } from "react";
 import CartItem from "./CartItem";
 import CartSummary from "./CartSummary";
 import api from "../../api";
@@ -6,6 +6,7 @@ import api from "../../api";
 const CartPage = () => {
 
   const cart_code = localStorage.getItem("cart_code")
+  const [cartitems, SetCartItems] =useState ([])
 
 
   useEffect(function(){
@@ -13,10 +14,12 @@ const CartPage = () => {
 
     .then(res =>{
       console.log(res.data)
+      SetCartItems(res.data.items)
     })
 
     .catch(err=>{
       console.log(err.message)
+      
     })
   },[cart_code])
 
@@ -31,7 +34,8 @@ const CartPage = () => {
       </h5>
       <div className="row">
         <div className="col-md-8">
-          <CartItem/>
+          {cartitems.map(item=><CartItem key ={item.id}item={item}/>
+          )}
           
         </div>
 
