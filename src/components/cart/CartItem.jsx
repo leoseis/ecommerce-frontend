@@ -1,64 +1,40 @@
-import React, { useState } from 'react';
+import React from "react";
 
-const CartItem = () => {
-  const [quantity, setQuantity] = useState(1);
-  const [loading, setLoading] = useState(false);
+const BASE_URL = "http://127.0.0.1:8001"; // Change if your backend is hosted elsewhere
 
-  // Example static item (replace later with props)
-  const item = {
-    product: {
-      name: "Sample Product",
-      price: 50,
-      image: "https://via.placeholder.com/80",
-    },
-  };
-
-  const handleUpdate = () => {
-    setLoading(true);
-    setTimeout(() => setLoading(false), 1000); // simulate update delay
-  };
-
-  const handleRemove = () => {
-    alert("Removed from cart");
-  };
+const CartItem = ({ item }) => {
+  const product = item.product || {}; // safely handle missing product
+  const imageUrl = product.image
+    ? `${BASE_URL}${product.image}`
+    : "/placeholder.png";
+  const name = product.name || "Unnamed Product";
+  const price = product.price || 0;
+  const quantity = item.quantity || 1;
 
   return (
-    <div className="col-md-12">
-      <div
-        className="cart-item d-flex align-items-center mb-3 p-3"
-        style={{ backgroundColor: '#f8f9fa', borderRadius: '8px' }}
-      >
-        <img
-          src={item.product.image}
-          alt="Product"
-          className="img-fluid"
-          style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '5px' }}
-        />
-        <div className="ms-3 flex-grow-1">
-          <h5 className="mb-1">{item.product.name}</h5>
-          <p className="mb-0 text-muted">${item.product.price}</p>
-        </div>
-
-        <div className="d-flex align-items-center">
-          <input
-            type="number"
-            min="1"
-            className="form-control me-3"
-            value={quantity}
-            onChange={(e) => setQuantity(e.target.value)}
-            style={{ width: '70px' }}
+    <div className="card mb-3 shadow-sm">
+      <div className="row g-0 align-items-center">
+        <div className="col-md-3 text-center">
+          <img
+            src={`${BASE_URL}${product.image}`}
+            alt={name}
+            className="img-fluid rounded-start"
+            style={{ width: "100px", height: "100px", objectFit: "cover" }}
           />
-          <button
-            className="btn btn-sm mx-2"
-            onClick={handleUpdate}
-            style={{ backgroundColor: '#4b3bcb', color: 'white' }}
-            disabled={loading}
-          >
-            {loading ? 'Updating...' : 'Update'}
-          </button>
-          <button className="btn btn-danger btn-sm" onClick={handleRemove}>
-            Remove
-          </button>
+        </div>
+        <div className="col-md-9">
+          <div className="card-body">
+            <h6 className="card-title">{name}</h6>
+            <p className="card-text mb-1">
+              <strong>Price:</strong> ₦{price.toLocaleString()}
+            </p>
+            <p className="card-text mb-1">
+              <strong>Quantity:</strong> {quantity}
+            </p>
+            <p className="card-text">
+              <strong>Total:</strong> ₦{(price * quantity).toLocaleString()}
+            </p>
+          </div>
         </div>
       </div>
     </div>
